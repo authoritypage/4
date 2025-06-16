@@ -28,8 +28,8 @@
     --gradient-direction: 45deg; /* Subtle diagonal gradient */
 
     /* Typography */
-    --font-heading: 'Arimo', sans-serif;    /* Clean, modern sans-serif for UI, titles */
-    --font-body: 'Arimo', sans-serif;       /* Legible, classic serif for body text (similar to Apple Books) */
+    --font-heading: 'Helvetica', sans-serif;    /* Clean, modern sans-serif for UI, titles */
+    --font-body: 'Helvetica', sans-serif;       /* Legible, classic serif for body text (similar to Apple Books) */
     --font-size-base: 1.0625rem; /* 17px */
     --font-size-sm: 0.9375rem;    /* 15px */
     --font-size-md: 1.125rem;     /* 18px */
