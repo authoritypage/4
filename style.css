@@ -4,6 +4,11 @@
     Optimized for presenting complex information elegantly on a light background.
 */
 
+/* --- Google Fonts Import --- */
+/* Ensure these fonts are linked in your HTML <head> for production,
+   or uncomment these @import rules if this is a standalone CSS file. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;700&display=swap');
+
 /* --- CSS Variables for Global Styling --- */
 :root {
     /* Color Palette: Clean, Modern, Bright */
@@ -15,6 +20,7 @@
     --color-accent-hover: #0060df;          /* Darker blue for hover states */
     --color-border: #E8E8ED;                /* Very subtle light gray border */
     --color-critical-highlight: #FF453A;    /* A vibrant red for "CRITICAL" warnings */
+    --color-critical-background: rgba(255, 69, 58, 0.08); /* Slightly lighter, more subtle background for critical */
 
     /* Gradients for CTA button */
     --gradient-start: #007AFF; /* Start Apple Blue */
@@ -25,11 +31,16 @@
     --font-heading: 'Inter', sans-serif;    /* Clean, modern sans-serif for UI, titles */
     --font-body: 'Noto Serif', serif;       /* Legible, classic serif for body text (similar to Apple Books) */
     --font-size-base: 1.0625rem; /* 17px */
-    --font-size-sm: 0.9375rem;   /* 15px */
-    --font-size-md: 1.125rem;    /* 18px */
-    --font-size-lg: 1.5rem;      /* 24px */
-    --font-size-xl: 2.5rem;      /* 40px */
-    --font-size-xxl: 3.5rem;     /* 56px - Hero Headline */
+    --font-size-sm: 0.9375rem;    /* 15px */
+    --font-size-md: 1.125rem;     /* 18px */
+    --font-size-lg: 1.5rem;       /* 24px */
+    --font-size-xl: 2.5rem;       /* 40px */
+    --font-size-xxl: 3.5rem;      /* 56px - Hero Headline */
+
+    /* Fluid Typography with clamp() - adjust as needed */
+    --font-size-hero-fluid: clamp(2.5rem, 6vw, 3.5rem); /* From 40px to 56px */
+    --font-size-subhero-fluid: clamp(1.125rem, 2.5vw, 1.5rem); /* From 18px to 24px */
+    --font-size-section-title-fluid: clamp(2rem, 4vw, 2.5rem); /* From 32px to 40px */
 
     /* Spacing */
     --spacing-xs: 0.25rem;  /* 4px */
@@ -50,6 +61,9 @@
     --transition-fast: 0.2s;
     --transition-default: 0.3s;
     --transition-smooth: ease-out;
+
+    /* Z-index management */
+    --z-index-skip-link: 1000;
 }
 
 /* --- Base Styles & Resets --- */
@@ -74,6 +88,7 @@ body {
     flex-direction: column;
     -webkit-font-smoothing: antialiased; /* Better font rendering on macOS */
     -moz-osx-font-smoothing: grayscale; /* Better font rendering on macOS */
+    text-rendering: optimizeLegibility; /* Improve text rendering quality */
 }
 
 a {
@@ -82,8 +97,16 @@ a {
     transition: color var(--transition-fast) var(--transition-smooth);
 }
 
-a:hover,
-a:focus {
+/* Accessible focus states */
+a:focus-visible,
+button:focus-visible,
+.gallery-card:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 3px;
+    border-radius: var(--border-radius-sm); /* Ensure outline matches element shape */
+}
+
+a:hover {
     text-decoration: none; /* Remove underline by default */
     color: var(--color-accent-hover);
 }
@@ -176,8 +199,9 @@ li {
     background-color: var(--color-accent-primary);
     color: white;
     padding: var(--spacing-sm);
-    z-index: 1000;
+    z-index: var(--z-index-skip-link); /* Use variable for z-index */
     font-size: var(--font-size-sm);
+    border-radius: var(--border-radius-sm);
 }
 
 .skip-link:focus {
@@ -187,7 +211,7 @@ li {
 .highlight-critical {
     color: var(--color-critical-highlight);
     font-weight: 700;
-    background-color: rgba(255, 69, 58, 0.1);
+    background-color: var(--color-critical-background); /* Use lighter critical background */
     padding: 0.1em 0.3em;
     border-radius: var(--border-radius-sm);
 }
@@ -210,17 +234,18 @@ li {
     box-shadow: var(--shadow-icon-card); /* Reuse shadow definition */
     transition: all var(--transition-default) var(--transition-smooth);
     user-select: none;
+    /* For better tap feedback on mobile */
+    -webkit-tap-highlight-color: transparent;
 }
 
-.btn:hover,
-.btn:focus {
+.btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-icon-card-hover);
     filter: brightness(1.05); /* Slight brighten on hover */
 }
 
 .btn:active {
-    transform: translateY(0);
+    transform: translateY(0.5px); /* Subtle press down effect */
     box-shadow: var(--shadow-icon-card);
     filter: brightness(0.95); /* Slight darken on click */
 }
@@ -234,7 +259,8 @@ li {
 }
 
 .hero-headline {
-    font-size: var(--font-size-xxl);
+    /* Using clamp for fluid typography */
+    font-size: var(--font-size-hero-fluid);
     color: var(--color-text-primary);
     margin-bottom: var(--spacing-md);
     font-weight: 700;
@@ -247,7 +273,8 @@ li {
 
 .hero-subheadline {
     font-family: var(--font-heading);
-    font-size: var(--font-size-lg);
+    /* Using clamp for fluid typography */
+    font-size: var(--font-size-subhero-fluid);
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-xl);
     font-weight: 400;
@@ -312,13 +339,18 @@ li {
     text-align: center;
     aspect-ratio: 1 / 1; /* Make cards square */
     transition: transform var(--transition-default) var(--transition-smooth),
-                box-shadow var(--transition-default) var(--transition-smooth);
+                box-shadow var(--transition-default) var(--transition-smooth),
+                background-color var(--transition-default) var(--transition-smooth); /* Added background-color transition */
     color: var(--color-text-primary); /* Inherit for link text */
+    /* Ensure the whole card is clickable for accessibility, not just text inside */
+    text-decoration: none;
+    display: flex; /* Override default inline-block for anchor */
 }
 
 .gallery-card:hover {
     transform: translateY(-8px); /* Lift up on hover */
     box-shadow: var(--shadow-icon-card-hover);
+    background-color: var(--color-background-primary); /* Keep background consistent, or slightly off-white */
 }
 
 .gallery-card .card-icon {
@@ -342,7 +374,6 @@ li {
     width: 60%; /* SVG icons often look good at 60-70% width of their container */
     height: 60%;
 }
-
 
 .gallery-card .card-title {
     font-size: var(--font-size-md);
@@ -429,13 +460,16 @@ li {
 }
 
 .outline-section .section-title {
-    font-size: var(--font-size-xl);
+    /* Using clamp for fluid typography */
+    font-size: var(--font-size-section-title-fluid);
     font-weight: 700;
     text-align: left;
     margin-top: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
     line-height: 1.2;
-    scroll-margin-top: var(--site-header-height); /* For smooth scrolling past sticky header */
+    /* Ensure scroll-margin-top is set if you have a sticky header */
+    /* --site-header-height needs to be defined if header is sticky */
+    scroll-margin-top: 0; /* Placeholder, update if you add sticky header height */
 }
 
 .outline-section .sub-section-title {
@@ -471,6 +505,19 @@ li {
 }
 
 /* --- Media Queries --- */
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @media (max-width: 1024px) {
     .gallery-grid {
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -486,11 +533,12 @@ li {
 }
 
 @media (max-width: 768px) {
+    /* Font sizes handled by clamp() now, but providing fallback if clamp isn't fully supported */
     .hero-headline {
-        font-size: var(--font-size-xl);
+        font-size: var(--font-size-xl); /* Fallback */
     }
     .hero-subheadline {
-        font-size: var(--font-size-base);
+        font-size: var(--font-size-base); /* Fallback */
     }
     .header-action-links {
         flex-direction: column;
@@ -524,7 +572,7 @@ li {
     }
 
     .outline-section .section-title {
-        font-size: var(--font-size-lg);
+        font-size: var(--font-size-lg); /* Fallback */
         text-align: center; /* Center section titles on mobile */
     }
     .outline-section .sub-section-title {
@@ -551,10 +599,10 @@ li {
         padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-lg);
     }
     .hero-headline {
-        font-size: 2rem;
+        font-size: 2rem; /* Fallback */
     }
     .hero-subheadline {
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-sm); /* Fallback */
     }
     .gallery-grid {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
