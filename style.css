@@ -1,56 +1,55 @@
 /*
-    Pharmacological Insight | style.css
-    Modular "Gallery-style" presentation with clean design, gradients, and dark theme.
-    Inspired by Apple/Google aesthetics for clarity and engagement.
+    PharmaInsight Core | style.css
+    Clean, minimalist, gallery-style design inspired by Apple/Google UI.
+    Optimized for presenting complex information elegantly on a light background.
 */
 
-/* --- CSS Variables for Global Styling & Theme --- */
+/* --- CSS Variables for Global Styling --- */
 :root {
-    /* Color Palette */
-    --color-background: #0D0D0F;     /* Deep near-black background for overall site */
-    --color-panel-bg: #1A1A1E;       /* Slightly lighter dark for content modules */
-    --color-text-primary: #F0F2F5;   /* Soft white for main text */
-    --color-text-secondary: #AEB3BB; /* Medium gray for supporting text/metadata */
-    --color-accent-primary: #75BFEE; /* A professional, clear blue for highlights and active states */
-    --color-accent-secondary: #5B9FD4; /* Slightly darker shade for gradients */
-    --color-border: #3F4349;         /* Subtle separator lines and panel borders */
-    --color-critical-highlight: #EE6677; /* Softer red for critical points */
+    /* Color Palette: Clean, Modern, Bright */
+    --color-background-primary: #FFFFFF;    /* Pure white for main background */
+    --color-background-secondary: #F5F5F7;  /* Off-white for subtle section breaks or hover states */
+    --color-text-primary: #1D1D1F;          /* Dark gray/almost black for primary text (like Apple) */
+    --color-text-secondary: #6E6E73;        /* Lighter gray for subheadings, descriptions */
+    --color-accent-primary: #007AFF;        /* Apple Blue for links, active states, buttons */
+    --color-accent-hover: #0060df;          /* Darker blue for hover states */
+    --color-border: #E8E8ED;                /* Very subtle light gray border */
+    --color-critical-highlight: #FF453A;    /* A vibrant red for "CRITICAL" warnings */
 
-    /* Gradients for Buttons and Accents */
-    --gradient-start: #75BFEE;
-    --gradient-end: #5B9FD4;
-    --gradient-direction: 135deg; /* Diagonal for a modern feel */
+    /* Gradients for CTA button */
+    --gradient-start: #007AFF; /* Start Apple Blue */
+    --gradient-end: #0060df;   /* End darker blue */
+    --gradient-direction: 45deg; /* Subtle diagonal gradient */
 
     /* Typography */
-    --font-heading: 'Inter', sans-serif; /* Clean sans-serif for titles & UI */
-    --font-body: 'Lora', serif;         /* Elegant serif for body text, good readability */
-    --font-size-base: 1.15rem; /* Larger base font for readability */
-    --font-size-sm: 0.9rem;      /* Keywords, footer */
-    --font-size-md: 1.05rem;     /* Author info, some list items */
-    --font-size-lg: 1.4rem;      /* h3 module subtitles */
-    --font-size-xl: 2rem;        /* Module titles (h2) */
-    --font-size-xxl: 2.8rem;     /* Main header title */
+    --font-heading: 'Inter', sans-serif;    /* Clean, modern sans-serif for UI, titles */
+    --font-body: 'Noto Serif', serif;       /* Legible, classic serif for body text (similar to Apple Books) */
+    --font-size-base: 1.0625rem; /* 17px */
+    --font-size-sm: 0.9375rem;   /* 15px */
+    --font-size-md: 1.125rem;    /* 18px */
+    --font-size-lg: 1.5rem;      /* 24px */
+    --font-size-xl: 2.5rem;      /* 40px */
+    --font-size-xxl: 3.5rem;     /* 56px - Hero Headline */
 
     /* Spacing */
-    --spacing-xs: 0.4rem;
-    --spacing-sm: 0.8rem;
-    --spacing-md: 1.2rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3.5rem;
-    --spacing-xxl: 5rem; /* Module vertical padding */
-    --spacing-gutter: 3rem; /* Gutter between TOC/content */
+    --spacing-xs: 0.25rem;  /* 4px */
+    --spacing-sm: 0.5rem;   /* 8px */
+    --spacing-md: 1rem;     /* 16px */
+    --spacing-lg: 1.5rem;   /* 24px */
+    --spacing-xl: 2.5rem;   /* 40px */
+    --spacing-xxl: 5rem;    /* 80px - section padding */
 
     /* Border Radius & Shadows */
     --border-radius-sm: 4px;
-    --border-radius-md: 8px;
-    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.4); /* Soft shadow for panels/buttons */
-    --shadow-deep: 0 8px 30px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover/active */
+    --border-radius-md: 12px;
+    --border-radius-lg: 18px; /* For large cards/app icons */
+    --shadow-icon-card: 0 5px 20px rgba(0, 0, 0, 0.08); /* Soft, subtle shadow for cards */
+    --shadow-icon-card-hover: 0 10px 30px rgba(0, 0, 0, 0.15); /* More pronounced on hover */
 
-    /* Transitions & Animations */
-    --transition-duration: 0.4s;
-    --transition-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth ease-out quad */
-    --fade-duration: 0.5s;
-    --slide-duration: 0.5s;
+    /* Transitions */
+    --transition-fast: 0.2s;
+    --transition-default: 0.3s;
+    --transition-smooth: ease-out;
 }
 
 /* --- Base Styles & Resets --- */
@@ -62,32 +61,31 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-x: hidden; /* Prevent horizontal scroll from module transitions */
 }
 
 body {
     font-family: var(--font-body);
     font-size: var(--font-size-base);
-    line-height: 1.7;
+    line-height: 1.65; /* Optimized for readability */
     color: var(--color-text-primary);
-    background-color: var(--color-background);
+    background-color: var(--color-background-primary);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    -webkit-font-smoothing: antialiased; /* macOS font smoothing */
-    -moz-osx-font-smoothing: grayscale; /* macOS font smoothing */
+    -webkit-font-smoothing: antialiased; /* Better font rendering on macOS */
+    -moz-osx-font-smoothing: grayscale; /* Better font rendering on macOS */
 }
 
 a {
     color: var(--color-accent-primary);
     text-decoration: none;
-    transition: color var(--transition-duration);
+    transition: color var(--transition-fast) var(--transition-smooth);
 }
 
 a:hover,
 a:focus {
-    text-decoration: underline;
-    color: var(--color-text-primary);
+    text-decoration: none; /* Remove underline by default */
+    color: var(--color-accent-hover);
 }
 
 img {
@@ -99,10 +97,11 @@ img {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     color: var(--color-text-primary);
-    line-height: 1.3;
+    line-height: 1.2;
     margin-top: var(--spacing-lg);
-    margin-bottom: var(--spacing-sm);
-    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+    letter-spacing: -0.01em; /* Tighter for modern headings */
 }
 
 p {
@@ -112,35 +111,34 @@ p {
 
 strong {
     font-weight: 600;
-    color: var(--color-accent-primary); /* Emphasize important terms slightly */
 }
 
 ul, ol {
-    margin-left: var(--spacing-lg);
+    margin-left: var(--spacing-xl);
     margin-bottom: var(--spacing-md);
     color: var(--color-text-primary);
-    list-style-position: outside;
 }
 
 li {
     margin-bottom: var(--spacing-xs);
-    line-height: 1.6;
 }
 
+/* Custom bullet lists */
 .bullet-list {
-    list-style-type: none; /* Remove default bullets */
+    list-style-type: none;
     margin-left: 0;
-    padding-left: var(--spacing-md); /* Indent for custom bullets */
+    padding-left: var(--spacing-md);
 }
 
 .bullet-list li::before {
     content: "\2022"; /* Unicode for a solid round bullet */
-    color: var(--color-bullet, var(--color-text-secondary)); /* Default to secondary text color */
+    color: var(--color-text-primary); /* Darker bullet for contrast */
     display: inline-block;
     width: 1em;
     margin-left: -1em;
     font-weight: bold;
     font-size: 1.2em;
+    line-height: 1; /* Align with text */
     vertical-align: middle;
 }
 
@@ -149,17 +147,15 @@ li {
     padding-left: var(--spacing-xl);
 }
 .sub-list li::before {
-    content: "-"; /* Use hyphens for sub-list */
-    color: var(--color-accent-primary); /* Highlight sub-list with accent */
-    font-weight: bold;
+    content: "\2022"; /* Keep solid bullet for consistency, slightly muted */
+    color: var(--color-text-secondary);
 }
-
 
 /* --- Utility Classes --- */
 .container {
-    max-width: 1440px; /* Overall layout max width */
+    max-width: 1200px; /* Overall max width */
     margin: 0 auto;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-lg);
 }
 
 .visually-hidden {
@@ -191,300 +187,278 @@ li {
 .highlight-critical {
     color: var(--color-critical-highlight);
     font-weight: 700;
-    background-color: rgba(238, 102, 119, 0.15); /* Subtle red background */
+    background-color: rgba(255, 69, 58, 0.1);
     padding: 0.1em 0.3em;
     border-radius: var(--border-radius-sm);
 }
 
-
-/* --- Gradient Buttons --- */
+/* Standard button for "View Full Rationale" */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xs);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: var(--border-radius-md);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
     font-size: var(--font-size-md);
     background: linear-gradient(var(--gradient-direction), var(--gradient-start), var(--gradient-end));
-    color: var(--color-background); /* Text color contrasting gradient */
+    color: white;
     border: none;
-    box-shadow: var(--shadow-soft);
-    transition: all var(--transition-duration) var(--transition-ease);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    user-select: none; /* Prevent text selection on click */
+    box-shadow: var(--shadow-icon-card); /* Reuse shadow definition */
+    transition: all var(--transition-default) var(--transition-smooth);
+    user-select: none;
 }
 
-.btn:hover:not(:disabled),
-.btn:focus:not(:disabled) {
+.btn:hover,
+.btn:focus {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-deep);
-    filter: brightness(1.1); /* Slight brighten on hover */
-    color: white; /* Make text pure white on hover */
+    box-shadow: var(--shadow-icon-card-hover);
+    filter: brightness(1.05); /* Slight brighten on hover */
 }
 
-.btn:active:not(:disabled) {
+.btn:active {
     transform: translateY(0);
-    box-shadow: var(--shadow-soft);
-    filter: brightness(0.9); /* Slight darken on click */
+    box-shadow: var(--shadow-icon-card);
+    filter: brightness(0.95); /* Slight darken on click */
 }
 
-.btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: var(--color-border); /* Muted background for disabled */
-    box-shadow: none;
-}
 
-.btn-text {
-    /* Optional: Hide text on small screens, show icon only */
-    display: block;
-}
-
-/* --- Header --- */
+/* --- Header (Hero Section) --- */
 .site-header {
-    background-color: var(--color-background);
-    padding: var(--spacing-lg) 0 var(--spacing-md);
-    border-bottom: 1px solid var(--color-border);
-    position: relative; /* For progress bar positioning */
-    z-index: 100; /* High z-index */
+    background-color: var(--color-background-primary);
+    padding: var(--spacing-xxl) 0 var(--spacing-xl);
     text-align: center;
 }
 
-.header-main-title {
+.hero-headline {
     font-size: var(--font-size-xxl);
     color: var(--color-text-primary);
-    margin-bottom: var(--spacing-xs);
-    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
     font-weight: 700;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
-.header-sub-title {
+.hero-subheadline {
     font-family: var(--font-heading);
-    font-size: var(--font-size-xl);
-    color: var(--color-accent-primary);
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.4;
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+    font-weight: 400;
+}
+
+.header-action-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    font-size: var(--font-size-md);
+    font-family: var(--font-heading);
     font-weight: 500;
 }
 
-/* Reading Progress Bar */
-.reading-progress-bar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0%;
-    height: 6px; /* Slightly thicker for visual prominence */
-    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end)); /* Gradient progress */
-    z-index: 100;
-    transition: width 0.2s linear;
-    border-radius: 0 3px 3px 0; /* Rounded right edge */
-}
-
-
-/* --- Main Content Layout (CSS Grid) --- */
-.main-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr; /* Fixed TOC width, flexible content area */
-    gap: var(--spacing-gutter);
-    padding-top: var(--spacing-xl);
-    padding-bottom: var(--spacing-xl);
-    flex-grow: 1; /* Allow main content to grow */
-}
-
-
-/* --- Table of Contents (Sidebar) --- */
-.sidebar-toc {
-    grid-column: 1; /* Left sidebar */
-    position: sticky;
-    top: calc(var(--site-header-height) + var(--spacing-xl)); /* Dynamic top offset after header */
-    height: calc(100vh - var(--site-header-height) - var(--spacing-xl) * 2); /* Fit into viewport */
-    overflow-y: auto;
-    padding-right: var(--spacing-md);
-    border-right: 1px solid var(--color-border);
-    padding-top: var(--spacing-md);
-    font-family: var(--font-heading);
-    z-index: 50;
-}
-
-.toc-title {
-    font-size: var(--font-size-lg);
-    margin-top: 0;
-    margin-bottom: var(--spacing-lg);
-    color: var(--color-text-primary);
-    text-align: left;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding-left: var(--spacing-sm);
-}
-
-#toc-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#toc-nav li {
-    margin-bottom: 0.3rem;
-}
-
-#toc-nav a {
-    display: block;
-    padding: 0.6rem var(--spacing-sm); /* More generous padding */
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-md);
-    border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-fast), color var(--transition-fast);
-}
-
-#toc-nav a:hover {
-    background-color: var(--color-panel-bg); /* Darker panel hover */
-    color: var(--color-text-primary);
-    text-decoration: none;
-}
-
-#toc-nav a.active {
-    background: linear-gradient(to right, color-mix(in srgb, var(--gradient-start) 20%, transparent) 0%, transparent 100%); /* Subtle gradient highlight */
+.action-link-item {
     color: var(--color-accent-primary);
-    font-weight: 600;
-    border-left: 3px solid var(--color-accent-primary);
-    padding-left: calc(var(--spacing-sm) - 3px);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    position: relative;
+    transition: color var(--transition-fast) var(--transition-smooth);
 }
 
-/* Indent for sub-levels */
-#toc-nav ul ul {
-    margin-left: var(--spacing-md);
-    border-left: 1px dashed var(--color-border);
-    padding-left: var(--spacing-sm);
-    margin-top: 0.3rem;
+.action-link-item i {
+    font-size: 0.9em;
+    transition: transform var(--transition-fast) var(--transition-smooth);
 }
-#toc-nav ul ul li a {
-    font-size: var(--font-size-sm);
+.action-link-item:hover i {
+    transform: translateX(3px); /* Subtle slide for arrow */
+}
+.action-link-item:hover {
+    color: var(--color-accent-hover);
 }
 
 
-/* --- Content Display Area (Main Module Container) --- */
-.content-panel-area {
-    grid-column: 2; /* Main content */
+/* --- Gallery of Modules (Main Interaction Area) --- */
+.gallery-modules {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+    background-color: var(--color-background-secondary); /* Off-white for section */
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Min card width for small screens */
+    gap: var(--spacing-xl);
+    justify-content: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.gallery-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Push buttons to top/bottom */
-    min-height: calc(100vh - (var(--spacing-xl) * 2) - 80px); /* Ensure minimum height for interaction, less header */
-}
-
-.content-display {
-    position: relative; /* For absolute positioning of modules for transitions */
-    overflow: hidden; /* Hide modules out of view */
-    background-color: var(--color-panel-bg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-soft);
-    padding: var(--spacing-xl) var(--spacing-lg); /* Generous internal padding */
-    min-height: 500px; /* Min height to prevent collapse */
-    display: flex; /* Ensures content inside pushes down */
-    flex-direction: column;
-}
-
-.module {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none; /* Disable interaction when hidden */
-    transform: translateY(20px); /* Initial state for animation */
-    transition: opacity var(--fade-duration) var(--transition-ease),
-                transform var(--slide-duration) var(--transition-ease),
-                visibility 0s linear var(--fade-duration); /* Hide after fade out */
-    padding: var(--spacing-xl) var(--spacing-lg); /* Match parent for consistency */
-    overflow-y: auto; /* Enable scroll if module content is tall */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
-.module.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all; /* Enable interaction */
-    transform: translateY(0);
-    transition: opacity var(--fade-duration) var(--transition-ease),
-                transform var(--slide-duration) var(--transition-ease),
-                visibility 0s linear 0s; /* Show immediately */
-}
-
-/* Additional transition effects for previous/next */
-.module.animate-prev {
-    transform: translateY(-20px); /* Slide down from top when coming from next */
-}
-.module.animate-next {
-    transform: translateY(20px); /* Slide up from bottom when coming from prev */
-}
-
-/* Titles within modules */
-.module-title {
-    font-size: var(--font-size-xl);
-    color: var(--color-accent-primary);
-    margin-top: 0; /* Reset top margin for first element in module */
-    margin-bottom: var(--spacing-lg);
-    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-background-primary);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-icon-card);
+    padding: var(--spacing-xl) var(--spacing-md);
     text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding-bottom: var(--spacing-sm);
-    border-bottom: 1px dashed var(--color-border);
-    position: sticky; /* Keep title visible if module content scrolls */
-    top: 0;
-    background-color: var(--color-panel-bg);
-    z-index: 10;
+    aspect-ratio: 1 / 1; /* Make cards square */
+    transition: transform var(--transition-default) var(--transition-smooth),
+                box-shadow var(--transition-default) var(--transition-smooth);
+    color: var(--color-text-primary); /* Inherit for link text */
 }
 
-.intro-abstract, .disclaimer-text {
+.gallery-card:hover {
+    transform: translateY(-8px); /* Lift up on hover */
+    box-shadow: var(--shadow-icon-card-hover);
+}
+
+.gallery-card .card-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px; /* Size of the icon background shape */
+    height: 80px;
+    background-color: var(--color-accent-primary); /* Icon background color */
+    border-radius: var(--border-radius-md); /* Match icon shape radius */
+    margin-bottom: var(--spacing-md);
+    overflow: hidden; /* To contain potential SVG icon shapes */
+}
+
+.gallery-card .card-icon i {
+    color: white; /* Icon color */
+    font-size: 2.5rem; /* Icon size */
+}
+/* If using custom SVG images, style img directly */
+.gallery-card .card-icon img {
+    width: 60%; /* SVG icons often look good at 60-70% width of their container */
+    height: 60%;
+}
+
+
+.gallery-card .card-title {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+    max-width: 90%; /* Prevent text from spilling too much */
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-xl); /* Space for the "View Full Rationale" button */
+}
+
+
+/* --- Full Outline Content (Scrollable Sections) --- */
+.full-outline-content {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+    background-color: var(--color-background-primary); /* Consistent white background */
+}
+
+.text-content-narrow {
+    max-width: 800px; /* Ideal max-width for long text readability */
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.author-info {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+}
+
+.keywords {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.5;
+    font-weight: 400;
+}
+.keywords strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.section-spacing {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+}
+
+
+/* Section Dividers within the outline */
+.section-divider-main {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: var(--spacing-xxl) auto;
+    width: 50%;
+    max-width: 300px;
+}
+
+.section-divider {
+    border: none;
+    border-top: 1px dashed var(--color-border);
+    margin: var(--spacing-xl) auto;
+    width: 60%;
+    max-width: 250px;
+}
+
+
+/* Outline Sections */
+.outline-section {
+    margin-bottom: var(--spacing-xxl); /* Space between major sections */
+}
+
+.outline-section:last-child {
+    margin-bottom: 0;
+}
+
+.outline-section .section-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    text-align: left;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+    scroll-margin-top: var(--site-header-height); /* For smooth scrolling past sticky header */
+}
+
+.outline-section .sub-section-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text-primary); /* Keep consistent, maybe a darker hue */
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 0;
+}
+
+.disclaimer-intro, .disclaimer-text {
     font-style: italic;
     font-size: var(--font-size-md);
     color: var(--color-text-secondary);
 }
 
-.patient-note {
-    font-weight: 500;
-    color: var(--color-accent-primary);
-    margin-top: var(--spacing-md);
-}
-
-/* Navigation Buttons at Top & Bottom */
-.nav-buttons-top, .nav-buttons-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-md) 0;
-}
-
-.nav-buttons-top {
-    margin-bottom: var(--spacing-md); /* Space below header controls */
-}
-.nav-buttons-bottom {
-    margin-top: var(--spacing-md); /* Space above footer controls */
-}
-
-.nav-buttons-top .btn,
-.nav-buttons-bottom .btn {
-    padding: var(--spacing-sm) var(--spacing-md);
-    min-width: 140px; /* Consistent button width */
-}
-
-
 /* --- Footer --- */
 .site-footer {
-    background-color: var(--color-background);
+    background-color: var(--color-background-primary);
     color: var(--color-text-secondary);
-    padding: var(--spacing-lg) 0 var(--spacing-md);
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
     text-align: center;
-    margin-top: var(--spacing-xxl); /* Push footer down relative to main layout */
     border-top: 1px solid var(--color-border);
 }
 
@@ -496,118 +470,112 @@ li {
     margin-bottom: var(--spacing-xs);
 }
 
-/* --- Media Queries for Responsiveness --- */
-@media (max-width: 992px) {
-    .main-layout {
-        grid-template-columns: 1fr; /* Single column layout for small screens */
+/* --- Media Queries --- */
+@media (max-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         gap: var(--spacing-lg);
-        padding-top: var(--spacing-md);
-        padding-bottom: var(--spacing-md);
     }
-
-    .sidebar-toc {
-        grid-column: 1; /* Place TOC at the top */
-        position: static; /* No longer sticky */
-        height: auto;
-        border-right: none; /* Remove right border */
-        border-bottom: 1px solid var(--color-border); /* Add bottom border */
-        padding: var(--spacing-md) 0;
-        margin-bottom: var(--spacing-lg);
-        text-align: center; /* Center TOC title for mobile */
+    .gallery-card .card-icon {
+        width: 70px;
+        height: 70px;
     }
-
-    .toc-title {
-        text-align: center;
-        padding-left: 0;
-    }
-
-    #toc-nav ul {
-        display: flex; /* Make TOC items inline for smaller screens */
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: var(--spacing-xs);
-    }
-
-    #toc-nav li {
-        margin-bottom: 0;
-    }
-
-    #toc-nav a {
-        padding: 0.3rem var(--spacing-xs);
-        font-size: var(--font-size-sm);
-    }
-    #toc-nav a.active {
-        padding-left: var(--spacing-xs); /* Adjust padding for no left border */
-        border-left: none;
-        border-bottom: 2px solid var(--color-accent-primary); /* Use bottom border instead */
-        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
-        background: transparent; /* Remove subtle gradient on compact TOC */
-    }
-
-    .content-panel-area {
-        grid-column: 1; /* Ensure it stays in the main flow */
-        padding: 0 var(--spacing-sm); /* Ensure content has padding */
-    }
-
-    .module {
-        padding: var(--spacing-xl) var(--spacing-sm); /* Adjust internal module padding */
+    .gallery-card .card-icon i {
+        font-size: 2.2rem;
     }
 }
 
 @media (max-width: 768px) {
-    body {
-        font-size: 1rem;
+    .hero-headline {
+        font-size: var(--font-size-xl);
     }
-    .container {
-        padding: 0 var(--spacing-sm);
-    }
-    .header-main-title {
-        font-size: 2rem;
-    }
-    .header-sub-title {
+    .hero-subheadline {
         font-size: var(--font-size-base);
     }
-    .module-title {
-        font-size: 1.6rem;
+    .header-action-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
     }
-    h3 {
+    .action-link-item {
+        font-size: var(--font-size-md);
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: var(--spacing-md);
+    }
+    .gallery-card .card-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .gallery-card .card-icon i {
+        font-size: 2rem;
+    }
+    .gallery-card .card-title {
+        font-size: var(--font-size-sm);
+    }
+
+    .section-spacing {
+        padding-top: var(--spacing-xl);
+        padding-bottom: var(--spacing-xl);
+    }
+
+    .full-outline-content .text-content-narrow {
+        padding: 0 var(--spacing-md); /* Ensure padding on smaller screens */
+    }
+
+    .outline-section .section-title {
         font-size: var(--font-size-lg);
+        text-align: center; /* Center section titles on mobile */
+    }
+    .outline-section .sub-section-title {
+        font-size: var(--font-size-base);
+        text-align: center;
+    }
+
+    ul, ol {
+        margin-left: var(--spacing-md); /* Reduce indent for smaller screens */
+    }
+    .bullet-list {
+        padding-left: var(--spacing-xs);
     }
     .bullet-list li::before {
-        font-size: 1em; /* Smaller bullet for smaller text */
+        margin-left: -0.7em; /* Adjust for reduced padding */
     }
-    .btn {
-        padding: var(--spacing-sm) var(--spacing-md);
-        font-size: var(--font-size-sm);
-        min-width: 120px;
+    .sub-list {
+        padding-left: var(--spacing-lg);
     }
 }
 
 @media (max-width: 480px) {
     .site-header {
-        padding: var(--spacing-sm) 0;
+        padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-lg);
     }
-    .header-main-title {
-        font-size: 1.6rem;
+    .hero-headline {
+        font-size: 2rem;
     }
-    .header-sub-title {
-        font-size: 0.9rem;
+    .hero-subheadline {
+        font-size: var(--font-size-sm);
     }
-    .module {
-        padding: var(--spacing-lg) var(--spacing-sm); /* Reduce overall padding further */
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
-    .module-title {
-        font-size: 1.4rem;
-        padding-bottom: var(--spacing-xs);
+    .gallery-card .card-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: var(--spacing-sm);
     }
-    .btn .btn-text {
-        display: none; /* Hide button text, show icon only on very small screens */
+    .gallery-card .card-icon i {
+        font-size: 1.8rem;
     }
-    .nav-buttons-top .btn,
-    .nav-buttons-bottom .btn {
-        min-width: 50px; /* Small square buttons */
+    .gallery-card .card-title {
+        font-size: var(--font-size-sm);
     }
-    .bullet-list li, .sub-list li {
-        font-size: 0.95rem; /* Smaller text within lists */
+    .btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+
+    .author-info, .keywords, .disclaimer-text {
+        font-size: var(--font-size-sm);
     }
 }
