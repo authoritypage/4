@@ -12,13 +12,19 @@
     <!-- Favicon -->
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
-    <!-- Custom Fonts: Inter (for headings/UI), Noto Serif (for body text) -->
+    <!-- Preconnect to Google Fonts for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload critical fonts for improved performance -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMwM.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/notoserif/v23/ga6ibw12pk6_iNwx0zXhAqf8gsiW5C_bYw.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Custom Fonts: Inter (for headings/UI), Noto Serif (for body text) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome for Icons (replace with custom SVGs in assets if desired) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-P3K5yPqC0QY5uBq3x6zB1h5h7l6zL5p4W5g5+w+P8B+5+Y9Q0r8yN3c2l6j9Z8g=" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome for Icons (consider replacing with custom SVGs stored locally for performance and control) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-P3K5yPqC0QY5uBq3x6zB1h5h7l6zL5p4W5g5+w+P8B+5+Y9Q0r8yN3c2l6j9Z8g=" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css">
@@ -27,88 +33,99 @@
     <!-- Accessibility: Skip to main content link for screen readers -->
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header class="site-header">
+    <header class="site-header" role="banner">
         <div class="container header-content">
+            <!-- Main heading for the site, should ideally be the site name/logo -->
             <h1 class="hero-headline">PharmaInsight Core</h1>
+            <!-- Sub-headline or tagline for the current page/topic -->
             <p class="hero-subheadline">The Neurochemical Rationale: High-Dose Stimulant Therapy</p>
             <div class="header-action-links">
-                <a href="#summary-profile" class="action-link-item">Explore Outline <i class="fas fa-arrow-down"></i></a>
-                <a href="#" class="action-link-item">Learn More <i class="fas fa-arrow-right"></i></a>
+                <!-- Anchor links with clear purpose and accessibility labels -->
+                <a href="#summary-profile" class="action-link-item" aria-label="Explore the Full Outline">
+                    Explore Outline <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                </a>
+                <a href="#" class="action-link-item" aria-label="Learn More About PharmaInsight">
+                    Learn More <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
     </header>
 
-    <main id="main-content">
-        <!-- Gallery of Modules -->
-        <section class="gallery-modules section-spacing">
+    <main id="main-content" role="main">
+        <!-- Gallery of Modules - Provides a navigable overview of content sections -->
+        <section class="gallery-modules section-spacing" aria-labelledby="gallery-heading">
             <div class="container">
+                <h2 id="gallery-heading" class="visually-hidden">Outline Sections Overview</h2>
                 <div class="gallery-grid">
                     <!-- Gallery Card 1: Patient Profile Summary -->
-                    <a href="#summary-profile" class="gallery-card">
+                    <!-- Each gallery card is an interactive link to a specific section -->
+                    <a href="#summary-profile" class="gallery-card" aria-label="Go to Patient Profile Summary section">
                         <div class="card-icon">
-                            <i class="fas fa-user-md"></i> <!-- Replaced with assets/icon-pharma-profile.svg if custom -->
+                            <!-- Using Font Awesome icon. If using SVG, replace with <img src="assets/icon-pharma-profile.svg" alt="Patient profile icon"> -->
+                            <i class="fas fa-user-md" aria-hidden="true"></i>
                         </div>
                         <h3 class="card-title">Patient Profile Summary</h3>
                     </a>
 
                     <!-- Gallery Card 2: Standard Pharmacokinetics -->
-                    <a href="#pharmacokinetics" class="gallery-card">
+                    <a href="#pharmacokinetics" class="gallery-card" aria-label="Go to Standard Pharmacokinetics section">
                         <div class="card-icon">
-                            <i class="fas fa-dna"></i> <!-- Replaced with assets/icon-pharma-pk.svg -->
+                            <i class="fas fa-dna" aria-hidden="true"></i>
                         </div>
                         <h3 class="card-title">Standard Pharmacokinetics</h3>
                     </a>
 
                     <!-- Gallery Card 3: Factors Accelerating Excretion -->
-                    <a href="#excretion-factors" class="gallery-card">
+                    <a href="#excretion-factors" class="gallery-card" aria-label="Go to Factors Accelerating Excretion section">
                         <div class="card-icon">
-                            <i class="fas fa-water"></i> <!-- Replaced with assets/icon-pharma-excretion.svg -->
+                            <i class="fas fa-water" aria-hidden="true"></i>
                         </div>
                         <h3 class="card-title">Accelerated Excretion (PK)</h3>
                     </a>
 
                     <!-- Gallery Card 4: Factors Reducing Effectiveness -->
-                    <a href="#effectiveness-factors" class="gallery-card">
+                    <a href="#effectiveness-factors" class="gallery-card" aria-label="Go to Factors Reducing Effectiveness section">
                         <div class="card-icon">
-                            <i class="fas fa-ban"></i> <!-- Replaced with assets/icon-pharma-blockade.svg -->
+                            <i class="fas fa-ban" aria-hidden="true"></i>
                         </div>
                         <h3 class="card-title">Reduced Effectiveness (PD)</h3>
                     </a>
 
                     <!-- Gallery Card 5: High-Dose Regimen Rationale -->
-                    <a href="#dosing-rationale" class="gallery-card">
+                    <a href="#dosing-rationale" class="gallery-card" aria-label="Go to High-Dose Regimen Rationale section">
                         <div class="card-icon">
-                            <i class="fas fa-syringe"></i> <!-- Replaced with assets/icon-pharma-ratio.svg -->
+                            <i class="fas fa-syringe" aria-hidden="true"></i>
                         </div>
                         <h3 class="card-title">High-Dose Regimen Rationale</h3>
                     </a>
 
                     <!-- Gallery Card 6: Why This Dosing is Necessary -->
-                    <a href="#why-necessary" class="gallery-card">
+                    <a href="#why-necessary" class="gallery-card" aria-label="Go to Why This Dosing is Necessary section">
                         <div class="card-icon">
-                            <i class="fas fa-question-circle"></i> <!-- Replaced with assets/icon-pharma-why.svg -->
+                            <i class="fas fa-question-circle" aria-hidden="true"></i>
                         </div>
                         <h3 class="card-title">Why This Dosing is Necessary</h3>
                     </a>
 
                     <!-- Gallery Card 7: Conclusion -->
-                    <a href="#conclusion-section" class="gallery-card">
+                    <a href="#conclusion-section" class="gallery-card" aria-label="Go to Conclusion section">
                         <div class="card-icon">
-                            <i class="fas fa-check-double"></i> <!-- Replaced with assets/icon-pharma-concl.svg -->
+                            <i class="fas fa-check-double" aria-hidden="true"></i>
                         </div>
                         <h3 class="card-title">Conclusion</h3>
                     </a>
                 </div>
                 <div class="center-content">
+                    <!-- Button to scroll to the main content area for full reading -->
                     <button class="btn btn-primary scroll-to-content" aria-label="Start Reading Full Outline">
                         View Full Rationale
-                        <i class="fas fa-arrow-down"></i>
+                        <i class="fas fa-arrow-down" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- Full Outline Content (Scrollable sections) -->
+        <!-- Full Outline Content (Scrollable sections for detailed information) -->
         <article class="full-outline-content section-spacing">
             <div class="container text-content-narrow">
                 <p class="author-info"><strong>Author:</strong> James Castillo<br>
@@ -117,9 +134,9 @@
 
                 <hr class="section-divider-main">
 
-                <!-- Patient Profile Summary -->
-                <section id="summary-profile" class="outline-section">
-                    <h2 class="section-title">Patient Profile Summary</h2>
+                <!-- Patient Profile Summary Section -->
+                <section id="summary-profile" class="outline-section" aria-labelledby="summary-profile-title">
+                    <h2 id="summary-profile-title" class="section-title">Patient Profile Summary</h2>
                     <ul class="bullet-list">
                         <li><strong>Lisdexamfetamine (Vyvanse 100mg) + Dextroamphetamine IR (20mg) daily.</strong></li>
                         <li><strong>Concurrent Medications:</strong> Latuda (Lurasidone), Viibryd (Vilazodone).</li>
@@ -131,15 +148,15 @@
 
                 <hr class="section-divider">
 
-                <!-- Standard Pharmacokinetics of Lisdexamfetamine & Dextroamphetamine -->
-                <section id="pharmacokinetics" class="outline-section">
-                    <h2 class="section-title">I. Standard Pharmacokinetics of Lisdexamfetamine & Dextroamphetamine</h2>
+                <!-- Standard Pharmacokinetics Section -->
+                <section id="pharmacokinetics" class="outline-section" aria-labelledby="pharmacokinetics-title">
+                    <h2 id="pharmacokinetics-title" class="section-title">I. Standard Pharmacokinetics of Lisdexamfetamine & Dextroamphetamine</h2>
                     <ul class="bullet-list">
                         <li><strong>Prodrug Activation:</strong> Lisdexamfetamine (Vyvanse) is inactive. After oral ingestion, it's absorbed and converted in the blood (primarily by red blood cell enzymes) into active dextroamphetamine and L-lysine. This conversion rate influences the release profile, contributing to Vyvanse's extended effect.</li>
                         <li><strong>Distribution:</strong> Dextroamphetamine is distributed throughout the body, including crossing the blood-brain barrier to act on central nervous system targets (dopamine and norepinephrine systems).</li>
                         <li><strong>Metabolism:</strong> Dextroamphetamine undergoes some metabolism in the liver, but a significant portion remains unchanged.</li>
-                        <li><p><strong><span class="highlight-critical">Excretion (CRITICAL FACTOR):</span></strong> The primary route of elimination for active dextroamphetamine is via the kidneys into the urine.</p>
-                            <ul class="sub-list">
+                        <li><p id="excretion-pk-details"><strong><span class="highlight-critical">Excretion (CRITICAL FACTOR):</span></strong> The primary route of elimination for active dextroamphetamine is via the kidneys into the urine.</p>
+                            <ul class="sub-list" aria-labelledby="excretion-pk-details">
                                 <li><strong>pH Dependence:</strong> Urinary pH is a critical determinant of the rate and extent of excretion.</li>
                                 <li><strong>Acidic Urine (Low pH):</strong> Dextroamphetamine (a weak base) becomes highly ionized. Ionized molecules are less lipid-soluble and are poorly reabsorbed from the renal tubules back into the bloodstream. This leads to rapid excretion and a shorter half-life of dextroamphetamine.</li>
                                 <li><strong>Alkaline Urine (High pH):</strong> Dextroamphetamine is less ionized (more non-ionized). The non-ionized form is more lipid-soluble and is readily reabsorbed from the renal tubules. This leads to slowed excretion and a longer half-life.</li>
@@ -150,9 +167,9 @@
 
                 <hr class="section-divider">
 
-                <!-- Patient-Specific Factors Driving the Need for Higher Dosing -->
-                <section id="patient-factors" class="outline-section">
-                    <h2 class="section-title">II. Patient-Specific Factors Driving the Need for Higher Dosing</h2>
+                <!-- Patient-Specific Factors Driving the Need for Higher Dosing Section -->
+                <section id="patient-factors" class="outline-section" aria-labelledby="patient-factors-title">
+                    <h2 id="patient-factors-title" class="section-title">II. Patient-Specific Factors Driving the Need for Higher Dosing</h2>
                     <p>This patient's profile includes multiple factors that increase the rate at which active dextroamphetamine is removed from the body or decrease its ability to act on its targets. To achieve a therapeutic effect, a higher input of the drug is needed to overcome these opposing forces.</p>
 
                     <h3 id="excretion-factors" class="sub-section-title">Factors Accelerating Dextroamphetamine Excretion (Pharmacokinetics):</h3>
@@ -167,15 +184,15 @@
                     <h3 id="effectiveness-factors" class="sub-section-title">Factors Reducing Dextroamphetamine Effectiveness at the Target (Pharmacodynamics):</h3>
                     <ul class="bullet-list">
                         <li><strong>Concurrent Latuda (Lurasidone):</strong> Latuda is an atypical antipsychotic and, critically, acts as a potent dopamine D2 receptor antagonist. Dextroamphetamine exerts its therapeutic effects in ADHD and BED primarily by increasing dopamine and norepinephrine levels in the brain, which then activate their respective receptors. By blocking D2 receptors, Latuda directly counteracts or blunts the effects of the increased dopamine caused by dextroamphetamine.</li>
-                        <li><p><strong>Cumulative Pharmacodynamic Effect:</strong> Even if some dextroamphetamine is present in the brain (after surviving rapid excretion), its ability to improve focus, executive function, and reduce binge eating is significantly impaired because the key receptors it needs to act on (like D2) are being blocked by Latuda. This reduces the efficacy of the drug that does get through.</p></li>
+                        <li><p><strong>Cumulative Pharmacodynamic Effect:</strong> Even if some dextroamphetamine is present in the brain (after surviving rapid excretion), its ability to improve focus, executive function, and reduce binge eating is significantly impaired because the key receptors it needs to act on (like D2) are being blocked by Latuda.</p></li>
                     </ul>
                 </section>
 
                 <hr class="section-divider">
 
-                <!-- Pharmacological Rationale for the High-Dose Regimen -->
-                <section id="dosing-rationale" class="outline-section">
-                    <h2 class="section-title">III. Pharmacological Rationale for the High-Dose Regimen (100mg Vyvanse + 20mg IR)</h2>
+                <!-- Pharmacological Rationale for the High-Dose Regimen Section -->
+                <section id="dosing-rationale" class="outline-section" aria-labelledby="dosing-rationale-title">
+                    <h2 id="dosing-rationale-title" class="section-title">III. Pharmacological Rationale for the High-Dose Regimen (100mg Vyvanse + 20mg IR)</h2>
                     <p>Given the factors constantly working against achieving and sustaining therapeutic levels of dextroamphetamine, a standard dose would be quickly eliminated and/or its effects blocked. Therefore, a significantly higher input of the drug is required to potentially overcome these challenges:</p>
                     <ul class="bullet-list">
                         <li><p><strong>100mg Vyvanse:</strong> This provides a large reservoir of the prodrug. While the conversion to dextroamphetamine happens at a rate limited by enzymatic hydrolysis, the higher total amount of prodrug means a greater quantity of active dextroamphetamine will be generated over time. This higher initial amount is necessary to:</p>
@@ -196,9 +213,9 @@
 
                 <hr class="section-divider">
 
-                <!-- Why This Dosing is Pharmacologically Possible and Potentially Necessary for This Patient -->
-                <section id="why-necessary" class="outline-section">
-                    <h2 class="section-title">IV. Why This Dosing is Pharmacologically Possible and Potentially Necessary for This Patient</h2>
+                <!-- Why This Dosing is Pharmacologically Possible and Potentially Necessary for This Patient Section -->
+                <section id="why-necessary" class="outline-section" aria-labelledby="why-necessary-title">
+                    <h2 id="why-necessary-title" class="section-title">IV. Why This Dosing is Pharmacologically Possible and Potentially Necessary for This Patient</h2>
                     <p>Combining these points:</p>
                     <ul class="bullet-list">
                         <li>This patient's body is aggressively removing active dextroamphetamine (due to high acid load and fast clearance).</li>
@@ -212,9 +229,9 @@
 
                 <hr class="section-divider">
 
-                <!-- Conclusion -->
-                <section id="conclusion-section" class="outline-section">
-                    <h2 class="section-title">Conclusion</h2>
+                <!-- Conclusion Section -->
+                <section id="conclusion-section" class="outline-section" aria-labelledby="conclusion-title">
+                    <h2 id="conclusion-title" class="section-title">Conclusion</h2>
                     <p class="disclaimer-intro">In conclusion, based on established pharmacokinetic principles (pH-dependent excretion, intrinsic clearance rates) and pharmacodynamic interactions (receptor antagonism), the patient's unique combination of diet, presumed metabolism, and concurrent medication creates a pharmacological environment where a dose of Vyvanse 100mg plus Dextroamphetamine IR 20mg daily is not only "possible" but pharmacologically explicable. Crucially, it was clinically demonstrated to be necessary for this individual to achieve functional therapeutic benefit.</p>
                     <p class="disclaimer-text"><em>Disclaimer: This outline is for educational and informational purposes only and is based on a hypothetical patient profile and known pharmacological principles. It is not medical advice. Consult a qualified healthcare professional for any medical concerns or treatment decisions.</em></p>
                 </section>
@@ -222,14 +239,14 @@
         </article>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" role="contentinfo">
         <div class="container footer-content">
             <p>© <span id="current-year"></span> James Castillo. All rights reserved.</p>
             <p>Published for educational and informational purposes only. Consult a qualified healthcare professional for medical advice.</p>
         </div>
     </footer>
 
-    <!-- JavaScript File -->
+    <!-- JavaScript File - defer attribute ensures HTML parses first -->
     <script src="script.js" defer></script>
 </body>
 </html>
