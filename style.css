@@ -1,1 +1,589 @@
+/*
+    Pharmacological Outline: High-Dose Stimulant Rationale | style.css
+    Designed for maximum readability, scientific clarity, and effortless navigation
+    of complex medical information. Prioritizing dark theme for reduced eye strain.
+*/
 
+/* --- CSS Variables for Global Styling & Theme --- */
+:root {
+    /* Color Palette (Dark Theme optimized for technical content) */
+    --color-background: #1C1C1E;     /* Dark gray / near-black */
+    --color-text-primary: #F0F2F5;   /* Off-white for main text */
+    --color-text-secondary: #AEB3BB; /* Medium gray for secondary text, metadata */
+    --color-accent: #5B9FD4;         /* Professional, clean blue for highlights */
+    --color-border: #3F4349;         /* Subtle separator lines */
+    --color-critical-highlight: #F74456; /* Red for CRITICAL FACTOR */
+    --color-bullet: #8899AB;         /* Subtle bullet point color */
+
+    /* Typography */
+    --font-body: 'IBM Plex Serif', serif; /* Classic serif for detailed text */
+    --font-heading: 'IBM Plex Sans', sans-serif; /* Clean sans-serif for titles & UI */
+    --font-size-base: 1.125rem; /* Larger base font for readability */
+    --font-size-sm: 0.9rem;      /* Keywords, footer, small notes */
+    --font-size-md: 1.05rem;     /* Author info, some list items */
+    --font-size-lg: 1.4rem;      /* h3 subtitles */
+    --font-size-xl: 2rem;        /* h2 chapter titles */
+    --font-size-xxl: 2.8rem;     /* Main header title */
+
+    /* Spacing */
+    --spacing-xs: 0.4rem;
+    --spacing-sm: 0.8rem;
+    --spacing-md: 1.2rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3.5rem;
+    --spacing-xxl: 5rem; /* Section padding */
+
+    /* Layout Max-Width for Readability */
+    --max-text-width: 800px; /* Optimal reading width for dense text */
+
+    /* Border Radius */
+    --border-radius-sm: 4px;
+
+    /* Transitions & Animations */
+    --transition-duration: 0.3s;
+    --transition-ease: ease-in-out;
+}
+
+/* --- Base Styles & Resets --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    line-height: 1.7; /* Increased for better readability of long text */
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased; /* macOS font smoothing */
+    -moz-osx-font-smoothing: grayscale; /* macOS font smoothing */
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color var(--transition-duration), background-color var(--transition-duration);
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+    color: var(--color-text-primary); /* Keep focus on content, not strong link color on hover */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-text-primary);
+    line-height: 1.3;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600; /* IBM Plex Sans default medium-bold */
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+}
+
+strong {
+    font-weight: 600; /* Match h-tags */
+    color: var(--color-text-primary);
+}
+
+ul, ol {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+    list-style-position: inside; /* For custom bullets later */
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.6;
+}
+
+/* Custom bullet points for bullet-list */
+.bullet-list {
+    list-style-type: none; /* Remove default bullets */
+    margin-left: 0;
+    padding-left: var(--spacing-lg);
+}
+
+.bullet-list li::before {
+    content: "\2022"; /* Unicode for a solid round bullet */
+    color: var(--color-bullet);
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    font-weight: bold;
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.sub-list {
+    margin-top: var(--spacing-sm);
+    padding-left: var(--spacing-xl);
+}
+.sub-list li::before {
+    content: "-"; /* Use hyphens for sub-list */
+    color: var(--color-bullet);
+    font-weight: bold;
+}
+
+
+/* --- Utility Classes --- */
+.container {
+    max-width: 1400px; /* Overall layout max width */
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background-color: var(--color-accent);
+    color: white;
+    padding: var(--spacing-sm);
+    z-index: 1000;
+    font-size: var(--font-size-sm);
+}
+
+.skip-link:focus {
+    left: 0;
+}
+
+.highlight-critical {
+    color: var(--color-critical-highlight);
+    font-weight: 700;
+    background-color: rgba(247, 68, 86, 0.1); /* Subtle red background */
+    padding: 0.1em 0.3em;
+    border-radius: var(--border-radius-sm);
+}
+
+/* --- Header --- */
+.site-header {
+    background-color: var(--color-background);
+    padding: var(--spacing-lg) 0 var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    transition: padding var(--transition-duration), background-color var(--transition-duration), box-shadow var(--transition-duration);
+}
+
+.site-header.scrolled {
+    padding: var(--spacing-sm) 0;
+    background-color: color-mix(in srgb, var(--color-background) 90%, black);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.header-content {
+    text-align: center;
+    max-width: var(--max-text-width); /* Center and limit header text width */
+    margin: 0 auto;
+}
+
+.header-main-title {
+    font-size: var(--font-size-xxl);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.header-sub-title {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-lg);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.author-info {
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.author-info p {
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.4;
+}
+
+.keywords {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-sm);
+    line-height: 1.5;
+    color: var(--color-accent);
+    font-weight: 400;
+}
+.keywords strong {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+}
+
+
+/* Reading Progress Bar */
+.reading-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%; /* Filled by JS */
+    height: 4px;
+    background-color: var(--color-accent);
+    z-index: 100; /* Above header itself */
+    transition: width 0.1s linear;
+}
+
+
+/* --- Main Content Layout (CSS Grid) --- */
+.main-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(auto, var(--max-text-width)) 1fr; /* Fixed TOC, fixed content, flexible right gutter */
+    gap: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+}
+
+.outline-content {
+    grid-column: 2; /* Main content in the middle column */
+    /* max-width: var(--max-text-width); This is set on the grid-template-columns now */
+    margin: 0 auto; /* Ensures centering within its grid column if it's smaller than max-text-width */
+}
+
+.section-chapter {
+    margin-bottom: var(--spacing-xxl); /* Spacing between major sections */
+}
+
+.section-chapter:last-child {
+    margin-bottom: 0;
+}
+
+.section-chapter h2,
+.section-chapter h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    scroll-margin-top: calc(100px + var(--spacing-md)); /* Adjust for sticky header when linking */
+}
+
+/* Main Section Headings (I., II., III., etc.) */
+.section-chapter h2 {
+    font-size: var(--font-size-xl);
+    position: relative;
+    padding-bottom: var(--spacing-xs);
+    border-bottom: 1px solid var(--color-border); /* Underline for major sections */
+    display: inline-block; /* Makes border-bottom fit the content's width */
+    color: var(--color-accent); /* Make these major titles stand out */
+    font-weight: 700;
+}
+.section-chapter h2::before {
+    content: attr(data-level); /* Use the data-level attribute for Roman numerals/Summar */
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-text-secondary); /* Subdued color for the number */
+    position: absolute;
+    left: -2.5rem; /* Position the Roman numeral */
+    top: 0;
+    opacity: 0.5;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+/* Exception for the "Summary" section's number styling, since it's a prefix and not a chapter */
+#patient-profile-summary h2::before {
+    display: none; /* Hide the pseudo-element for this specific H2 */
+}
+#patient-profile-summary h2 {
+    color: var(--color-text-primary); /* Revert title color */
+    border-bottom: none; /* Remove border */
+    display: block; /* No longer inline-block */
+    text-align: center; /* Center the Summary H2 */
+    margin-bottom: var(--spacing-xl);
+    font-weight: 700;
+}
+
+
+/* Sub-Section Headings (A., B., C., etc.) */
+.section-chapter h3 {
+    font-size: var(--font-size-lg);
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    position: relative; /* For the "A." etc. counter if pseudo-elements were used here */
+}
+
+/* Horizontal rule separators for large sections */
+.section-divider {
+    border: none;
+    border-top: 1px dashed var(--color-border);
+    margin: var(--spacing-xxl) auto;
+    width: 60%;
+    max-width: 400px;
+}
+
+/* --- Table of Contents (Sidebar) --- */
+.sidebar-toc {
+    grid-column: 1; /* Left sidebar */
+    position: sticky;
+    top: 100px; /* Aligns with header, adjusted for sticky header */
+    height: calc(100vh - 100px - 4rem); /* Viewport height minus header/footer space */
+    overflow-y: auto; /* Enable scrolling for long TOCs */
+    padding-right: var(--spacing-md); /* Space from content */
+    font-family: var(--font-heading);
+    font-weight: 400;
+    z-index: 50; /* Below header, above main content */
+    border-right: 1px solid var(--color-border);
+    padding-top: var(--spacing-md); /* Vertical padding */
+}
+
+.toc-title {
+    font-size: var(--font-size-lg);
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-primary);
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-left: var(--spacing-sm);
+}
+
+#toc-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#toc-nav li {
+    margin-bottom: 0.3rem; /* Tighter spacing */
+}
+
+#toc-nav a {
+    display: block;
+    padding: 0.4rem var(--spacing-sm);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-md);
+    border-radius: var(--border-radius-sm);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+#toc-nav a:hover {
+    background-color: var(--color-border);
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+#toc-nav a.active {
+    background-color: color-mix(in srgb, var(--color-accent) 20%, transparent); /* Subtle accent fill */
+    color: var(--color-accent);
+    font-weight: 600; /* Medium bold for active item */
+    border-left: 3px solid var(--color-accent); /* Visual indicator */
+    padding-left: calc(var(--spacing-sm) - 3px);
+}
+
+/* Indent for sub-levels */
+#toc-nav ul ul {
+    margin-left: var(--spacing-md);
+    border-left: 1px solid var(--color-border); /* Subtle line for hierarchy */
+    padding-left: var(--spacing-sm);
+    margin-top: 0.3rem;
+}
+#toc-nav ul ul li a {
+    font-size: var(--font-size-sm); /* Smaller font for sub-items */
+}
+
+
+/* --- Footer --- */
+.site-footer {
+    background-color: var(--color-background);
+    color: var(--color-text-secondary);
+    padding: var(--spacing-lg) 0 var(--spacing-md);
+    text-align: center;
+    margin-top: var(--spacing-xxl); /* Push footer down */
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-content {
+    font-size: var(--font-size-sm);
+}
+
+.footer-content p {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 1200px) {
+    .main-layout {
+        grid-template-columns: 220px minmax(auto, var(--max-text-width)) 1fr; /* Reduce TOC width slightly */
+        gap: var(--spacing-lg);
+        padding-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-lg);
+    }
+    .sidebar-toc {
+        padding-right: var(--spacing-sm);
+    }
+    .section-chapter h2::before {
+        left: -2rem; /* Adjust Roman numeral position */
+    }
+}
+
+@media (max-width: 992px) {
+    .main-layout {
+        grid-template-columns: 1fr; /* Single column layout for small screens */
+        padding-top: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+    }
+
+    .sidebar-toc {
+        grid-column: 1; /* Place TOC at the top for small screens */
+        position: static; /* No longer sticky */
+        height: auto;
+        border-right: none; /* Remove right border */
+        border-bottom: 1px solid var(--color-border); /* Add bottom border */
+        padding: var(--spacing-md) 0;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .toc-title {
+        text-align: center;
+        padding-left: 0; /* No padding needed when centered */
+    }
+
+    #toc-nav ul {
+        display: flex; /* Make TOC items inline for smaller screens */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-xs); /* Smaller gap for horizontal display */
+    }
+
+    #toc-nav li {
+        margin-bottom: 0;
+    }
+
+    #toc-nav a {
+        padding: 0.3rem var(--spacing-xs);
+        font-size: var(--font-size-sm);
+    }
+    #toc-nav a.active {
+        padding-left: var(--spacing-xs); /* No left border, so adjust padding */
+        border-left: none;
+        border-bottom: 2px solid var(--color-accent); /* Use bottom border instead for active state */
+        border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0; /* Rounded top corners */
+    }
+    #toc-nav ul ul { /* Hide sub-level TOC on small screens for brevity */
+        display: none;
+    }
+
+    .outline-content {
+        grid-column: 1; /* Back to single column */
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 var(--spacing-sm); /* Ensure padding for content */
+    }
+
+    .header-main-title {
+        font-size: 2.2rem;
+    }
+    .header-sub-title {
+        font-size: var(--font-size-base);
+    }
+    .author-info, .keywords {
+        font-size: var(--font-size-sm);
+    }
+    .section-chapter h2 {
+        font-size: var(--font-size-xl);
+    }
+    .section-chapter h2::before { /* Adjust Roman numeral position for no left sidebar */
+        position: static;
+        display: inline-block;
+        margin-right: var(--spacing-xs);
+        font-size: 1.2rem; /* Smaller number */
+    }
+    #patient-profile-summary h2 { /* Ensure summary header is still centered */
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 1rem;
+    }
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    .header-main-title {
+        font-size: 1.8rem;
+    }
+    .header-sub-title {
+        font-size: var(--font-size-sm);
+    }
+    .section-chapter h2 {
+        font-size: 1.6rem;
+    }
+    .section-chapter h3 {
+        font-size: 1.3rem;
+    }
+    .section-divider {
+        margin: var(--spacing-lg) auto;
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header {
+        padding: var(--spacing-sm) 0 var(--spacing-xs);
+    }
+    .site-header.scrolled {
+        padding: 0.5rem 0;
+    }
+    .header-main-title {
+        font-size: 1.5rem;
+    }
+    .header-sub-title {
+        font-size: 0.9rem;
+    }
+    .author-info p, .keywords {
+        font-size: 0.8rem;
+        line-height: 1.2;
+    }
+    .section-chapter h2 {
+        font-size: 1.4rem;
+        margin-top: var(--spacing-lg);
+    }
+    .section-chapter h3 {
+        font-size: 1.1rem;
+    }
+    .section-chapter h2::before {
+        display: block; /* Move Roman numeral to new line on very small screens */
+        margin-bottom: var(--spacing-xs);
+    }
+}
